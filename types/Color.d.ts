@@ -1,1 +1,4 @@
-export type Color = 'RED' | 'WHITE' | 'BLUE' | 'BLACK';
+export type Color = {
+  text: string;
+  hex: string;
+}

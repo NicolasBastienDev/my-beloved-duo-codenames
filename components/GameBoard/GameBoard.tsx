@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScreenContainer } from 'react-native-screens';
-import { generateBoard } from '@/utils/board-data';
-import Square from './Square';
+import { generateBaseBoard, generateBoard } from '@/utils/board-data';
+import TileComponent from './Tile';
 import { Tile } from '@/types/Tile';
+import { Color } from '@/types/Color';
+import { Player } from '@/types/Player';
 
-const GameBoard: React.FC = () => {
+interface GameBoardProps {
+  currentPlayer: Player;
+  colorToApply: Color;
+}
+
+const GameBoard: React.FC<GameBoardProps> = ({currentPlayer, colorToApply}) => {
 
   const [board, setBoard] = useState<Tile[][]>(generateBoard(5, 5));
-  (board)
 
-  const revealTile = (rowIndex: number, colIndex: number) => {
+  const toggleTile = (rowIndex: number, colIndex: number) => {
     const newBoard = board.map((row, rIdx) =>
       row.map((tile, cIdx) => {
         if (rIdx === rowIndex && cIdx === colIndex) {
-          return { ...tile, revealed: true };
+          console.log(tile)
+          return { ...tile, revealed: !tile.revealed} as Tile;
         }
         return tile;
       })
@@ -36,10 +43,10 @@ const GameBoard: React.FC = () => {
       {board.map((row, rowIndex) => (
         <View key={rowIndex} style={styles.row}>
           {row.map((tile, colIndex) => (
-            <Square
+            <TileComponent
               key={colIndex}
               tile={tile}
-              onPress={() => revealTile(rowIndex, colIndex)}
+              onPress={() => toggleTile(rowIndex, colIndex)}
             />
           ))}
         </View>

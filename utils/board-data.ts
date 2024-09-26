@@ -1,10 +1,6 @@
+import { RED, BLUE, BLACK, WHITE, GREY } from "@/constants/TileColors";
 import { Color } from "@/types/Color";
 import { Tile } from "@/types/Tile";
-
-const RED: Color = 'RED';
-const WHITE: Color = 'WHITE';
-const BLUE: Color = 'BLUE';
-const BLACK: Color = 'BLACK';
 
 export const generateBoard = (rows: number, cols: number): Tile[][] => {
   const totalCells = rows * cols;
@@ -28,7 +24,13 @@ export const generateBoard = (rows: number, cols: number): Tile[][] => {
   return board;
 };
 
-const newTile = (color: Color) => ({
+export const generateBaseBoard = (rows: number, cols: number): Tile[][] => {
+  const baseBoard: Tile[][] = Array.from({ length: rows}, () => Array(cols).fill(newTile(GREY)));
+  return baseBoard;
+
+}
+
+const newTile = (color: Color): Tile => ({
   color,
   word: '',
   revealed: false,
