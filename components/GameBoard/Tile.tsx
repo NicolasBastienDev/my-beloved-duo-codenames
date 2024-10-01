@@ -24,23 +24,29 @@ const TileComponent: React.FC<TileProps> = ({ tile, onPress }) => {
       ]}
       onPress={onPress}
     >
-      <Text style={styles.text}>{tile.revealed ? tile.word : ''}</Text>
+      <Text style={[styles.text, { color: tile.revealed ? 'white' : 'black' }]}>{tile.word}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   tile: {
-    width: 60,
-    height: 60,
+    flex: 1,
+    minWidth: 40,
+    minHeight: 30,
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 40,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
     borderRadius: 5,
   },
   text: {
-    color: '#000',
-    fontSize: 16,
+    color: 'black',
+    fontSize: 12,
+    fontWeight: 'bold',
   },
 });
 

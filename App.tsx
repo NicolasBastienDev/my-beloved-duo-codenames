@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
@@ -6,6 +6,7 @@ import { HomeScreen } from './screens/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import Colors from './constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
+import { View, Text, StyleSheet } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,6 +16,8 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['nam
 
 export default function App() {
   const colorScheme: 'light' | 'dark' = useColorScheme() ?? 'light';
+
+
 
   return (
     <NavigationContainer>

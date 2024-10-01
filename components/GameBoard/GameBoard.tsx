@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScreenContainer } from 'react-native-screens';
-import { generateBaseBoard, generateBoard } from '@/utils/board-data';
+import { generateBaseBoard, generateBoard } from '@/utils/board-generation';
 import TileComponent from './Tile';
 import { Tile } from '@/types/Tile';
 import { Color } from '@/types/Color';
@@ -20,7 +20,6 @@ const GameBoard: React.FC<GameBoardProps> = ({currentPlayer, colorToApply}) => {
     const newBoard = board.map((row, rIdx) =>
       row.map((tile, cIdx) => {
         if (rIdx === rowIndex && cIdx === colIndex) {
-          console.log(tile)
           return { ...tile, revealed: !tile.revealed} as Tile;
         }
         return tile;
@@ -29,14 +28,6 @@ const GameBoard: React.FC<GameBoardProps> = ({currentPlayer, colorToApply}) => {
     setBoard(newBoard);
   };
 
-
-  interface SquareProps {
-
-    tile: Tile;
-  
-    onPress: () => void;
-  
-  }
 
   return (
     <View style={styles.container}>
@@ -57,12 +48,11 @@ const GameBoard: React.FC<GameBoardProps> = ({currentPlayer, colorToApply}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexShrink: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    maxHeight: '50%',
-    aspectRatio: 1,
+    padding: 5,
   },
   text: {
     fontSize: 20,
